@@ -10,7 +10,7 @@ import { UsersProvider } from './components/users-provider';
 import { UsersTable } from './components/users-table';
 import { users } from './data/users';
 
-export function Users({ search, navigate }: { search?: Record<string, unknown>; navigate?: any }) {
+export function Users() {
     return (
         <UsersProvider>
             <Header fixed>
@@ -30,7 +30,7 @@ export function Users({ search, navigate }: { search?: Record<string, unknown>; 
                     </div>
                     <UsersPrimaryButtons />
                 </div>
-                <UsersTable data={users} search={search} navigate={navigate} />
+                <UsersTable data={users} />
             </Main>
 
             <UsersDialogs />
