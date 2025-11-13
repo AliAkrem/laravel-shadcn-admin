@@ -1,8 +1,9 @@
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state';
 import { cn } from '@/lib/utils';
+import { router } from '@inertiajs/react';
 import {
+    type ColumnFiltersState,
     type SortingState,
     type VisibilityState,
     flexRender,
@@ -14,78 +15,133 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { roles } from '../data/data';
 import { type User } from '../data/schema';
 import { DataTableBulkActions } from './data-table-bulk-actions';
-import { usersColumns as columns } from './users-columns';
+import { usersColumns } from './users-columns';
 
 type DataTableProps = {
     data: User[];
-    search: Record<string, unknown>;
-    navigate: NavigateFn;
 };
 
-export function UsersTable({ data, search, navigate }: DataTableProps) {
-    // Local UI-only states
+export function UsersTable({ data }: DataTableProps) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const usernameParam = searchParams.get('username') || '';
+    const statusParam = searchParams.get('status') ? JSON.parse(searchParams.get('status')!) : [];
+    const roleParam = searchParams.get('role') ? JSON.parse(searchParams.get('role')!) : [];
+    const pageParam = searchParams.get('page');
+    const pageSizeParam = searchParams.get('pageSize');
+
     const [rowSelection, setRowSelection] = useState({});
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [sorting, setSorting] = useState<SortingState>([]);
-
-    // Local state management for table (uncomment to use local-only state, not synced with URL)
-    // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
-    // const [pagination, onPaginationChange] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
-
-    // Synced with URL states (keys/defaults mirror users route search schema)
-    const { columnFilters, onColumnFiltersChange, pagination, onPaginationChange, ensurePageInRange } = useTableUrlState({
-        search,
-        navigate,
-        pagination: { defaultPage: 1, defaultPageSize: 10 },
-        globalFilter: { enabled: false },
-        columnFilters: [
-            // username per-column text filter
-            { columnId: 'username', searchKey: 'username', type: 'string' },
-            { columnId: 'status', searchKey: 'status', type: 'array' },
-            { columnId: 'role', searchKey: 'role', type: 'array' },
-        ],
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() => {
+        const filters: ColumnFiltersState = [];
+        if (usernameParam) {
+            filters.push({ id: 'username', value: usernameParam });
+        }
+        if (statusParam.length > 0) {
+            filters.push({ id: 'status', value: statusParam });
+        }
+        if (roleParam.length > 0) {
+            filters.push({ id: 'role', value: roleParam });
+        }
+        return filters;
+    });
+    const [pagination, setPagination] = useState({
+        pageIndex: pageParam ? parseInt(pageParam) - 1 : 0,
+        pageSize: pageSizeParam ? parseInt(pageSizeParam) : 10,
     });
 
+    const handleColumnFiltersChange = (updater: ColumnFiltersState | ((old: ColumnFiltersState) => ColumnFiltersState)) => {
+        const newFilters = typeof updater === 'function' ? updater(columnFilters) : updater;
+        setColumnFilters(newFilters);
+
+        const params = new URLSearchParams(window.location.search);
+
+        params.delete('username');
+        params.delete('status');
+        params.delete('role');
+        // params.delete('page');
+
+        // Add new filter params
+        newFilters.forEach((filter) => {
+            if (filter.id === 'username' && typeof filter.value === 'string' && filter.value) {
+                params.set('username', filter.value);
+            } else if (Array.isArray(filter.value) && filter.value.length > 0) {
+                params.set(filter.id, JSON.stringify(filter.value));
+            }
+        });
+
+        const queryString = params.toString();
+        const url = queryString ? `/users?${queryString}` : '/users';
+
+        window.history.replaceState({}, '', url);
+
+        router.reload({
+            only: ['users'],
+        });
+    };
+
+    const handlePaginationChange = (updater: typeof pagination | ((old: typeof pagination) => typeof pagination)) => {
+        const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
+        setPagination(newPagination);
+
+        const params = new URLSearchParams(window.location.search);
+
+        // Update pagination params
+        const page = newPagination.pageIndex + 1;
+        if (page > 1) {
+            params.set('page', String(page));
+        } else {
+            params.delete('page');
+        }
+
+        if (newPagination.pageSize !== 10) {
+            params.set('pageSize', String(newPagination.pageSize));
+        } else {
+            params.delete('pageSize');
+        }
+
+        const queryString = params.toString();
+        const url = queryString ? `/users?${queryString}` : '/users';
+
+        window.history.replaceState({}, '', url);
+
+        router.reload({
+            only: ['users'],
+        });
+    };
+
+    const columns = useMemo(() => usersColumns, []);
     // eslint-disable-next-line react-hooks/incompatible-library
     const table = useReactTable({
         data,
         columns,
         state: {
             sorting,
-            pagination,
+            columnVisibility,
             rowSelection,
             columnFilters,
-            columnVisibility,
+            pagination,
         },
         enableRowSelection: true,
-        onPaginationChange,
-        onColumnFiltersChange,
         onRowSelectionChange: setRowSelection,
         onSortingChange: setSorting,
         onColumnVisibilityChange: setColumnVisibility,
-        getPaginationRowModel: getPaginationRowModel(),
+        onColumnFiltersChange: handleColumnFiltersChange,
+        onPaginationChange: handlePaginationChange,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFacetedRowModel: getFacetedRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
     });
 
-    useEffect(() => {
-        ensurePageInRange(table.getPageCount());
-    }, [table, ensurePageInRange]);
-
     return (
-        <div
-            className={cn(
-                'max-sm:has-[div[role="toolbar"]]:mb-16', // Add margin bottom to the table on mobile when the toolbar is visible
-                'flex flex-1 flex-col gap-4',
-            )}
-        >
+        <div className={cn('max-sm:has-[div[role="toolbar"]]:mb-16', 'flex flex-1 flex-col gap-4')}>
             <DataTableToolbar
                 table={table}
                 searchPlaceholder="Filter users..."
