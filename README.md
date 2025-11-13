@@ -2,9 +2,10 @@
 
 Admin Dashboard UI crafted with Shadcn and Vite, now implemented in Laravel with React Inertia.js. Built with responsiveness and accessibility in mind.
 
-<center>
-  <img width="70%" src="public/images/laravel-shadcn-admin.png" />
-</center>
+<div align="center">
+  <img width="50%" src="public/images/laravel-shadcn-admin.png" />
+</div>
+
 This project is a Laravel implementation of the original [Shadcn Admin Dashboard](https://github.com/satnaing/shadcn-admin), combining the power of Laravel's backend with React's frontend capabilities through Inertia.js. The UI components and design are adapted from the original project while being integrated into a full-stack Laravel application.
 
 ## About This Implementation
