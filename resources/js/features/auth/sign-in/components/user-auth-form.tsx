@@ -58,7 +58,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
 
                 // Redirect to the stored location or default to dashboard
                 const targetPath = redirectTo || '/dashboard';
-                router.visit(targetPath, { replace: true } as any);
+                router.visit(targetPath, { replace: true });
 
                 return `Welcome back, ${data.email}!`;
             },

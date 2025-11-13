@@ -1,8 +1,8 @@
-import '../css/index.css';
+import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ComponentType, ReactNode } from 'react';
+import { type ComponentType, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AuthenticatedLayout } from './components/layout/authenticated-layout';
 import { SettingsLayout } from './components/layout/settings-layout';
@@ -39,7 +39,6 @@ createInertiaApp({
             );
         }
 
-        page.default.layout = page.default.layout;
         return page;
     },
 

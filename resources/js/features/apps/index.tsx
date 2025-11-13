@@ -47,7 +47,7 @@ export function Apps() {
         router.visit(`/apps?${searchParams.toString()}`, {
             preserveState: true,
             replace: true,
-        } as any);
+        });
     };
 
     const handleTypeChange = (value: AppType) => {
@@ -61,7 +61,7 @@ export function Apps() {
         router.visit(`/apps?${searchParams.toString()}`, {
             preserveState: true,
             replace: true,
-        } as any);
+        });
     };
 
     const handleSortChange = (sort: 'asc' | 'desc') => {
@@ -71,7 +71,7 @@ export function Apps() {
         router.visit(`/apps?${searchParams.toString()}`, {
             preserveState: true,
             replace: true,
-        } as any);
+        });
     };
 
     return (

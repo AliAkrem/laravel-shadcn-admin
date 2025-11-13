@@ -17,7 +17,7 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
         router.visit('/auth/sign-in', {
             data: { redirect: currentPath },
             replace: true,
-        } as any);
+        });
     };
 
     return (
