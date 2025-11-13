@@ -18,7 +18,7 @@ export function LearnMore({ children, contentProps, triggerProps, ...props }: Le
                     <CircleQuestionMark className="size-4 [&>circle]:hidden" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent side="top" align="start" {...contentProps} className={cn('text-muted-foreground text-sm', contentProps?.className)}>
+            <PopoverContent side="top" align="start" {...contentProps} className={cn('text-sm text-muted-foreground', contentProps?.className)}>
                 {children}
             </PopoverContent>
         </Popover>

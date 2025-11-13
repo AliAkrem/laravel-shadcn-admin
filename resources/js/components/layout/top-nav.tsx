@@ -40,7 +40,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
                     <Link
                         key={`${title}-${href}`}
                         href={href}
-                        className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'} ${disabled ? 'pointer-events-none opacity-50' : ''}`}
+                        className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? '' : 'text-muted-foreground'} ${disabled ? 'pointer-events-none opacity-50' : ''}`}
                     >
                         {title}
                     </Link>

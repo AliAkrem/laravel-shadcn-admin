@@ -4,7 +4,6 @@ import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
-import { router } from '@inertiajs/react';
 import { TasksDialogs } from './components/tasks-dialogs';
 import { TasksPrimaryButtons } from './components/tasks-primary-buttons';
 import { TasksProvider } from './components/tasks-provider';
@@ -12,24 +11,6 @@ import { TasksTable } from './components/tasks-table';
 import { tasks } from './data/tasks';
 
 export function Tasks() {
-    const searchParams = new URLSearchParams(window.location.search);
-    const search = Object.fromEntries(searchParams.entries());
-
-    const navigate = (opts: {
-        search: boolean | Record<string, unknown> | ((prev: Record<string, unknown>) => Record<string, unknown>);
-        replace?: boolean;
-    }) => {
-        const newSearch = typeof opts.search === 'function' ? opts.search(search) : opts.search;
-
-        const searchData = newSearch === true ? search : newSearch === false ? {} : newSearch;
-
-        router.visit('/tasks', {
-            data: searchData,
-            replace: opts.replace,
-            preserveState: true,
-        } as any);
-    };
-
     return (
         <TasksProvider>
             <Header fixed>
@@ -49,7 +30,7 @@ export function Tasks() {
                     </div>
                     <TasksPrimaryButtons />
                 </div>
-                <TasksTable data={tasks} search={search} navigate={navigate} />
+                <TasksTable data={tasks} />
             </Main>
 
             <TasksDialogs />

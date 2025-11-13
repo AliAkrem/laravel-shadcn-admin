@@ -24,10 +24,10 @@ export function DataTablePagination<TData>({ table, className }: DataTablePagina
             style={{ overflowClipMargin: 1 }}
         >
             <div className="flex w-full items-center justify-between">
-                <div className="@2xl/content:hidden flex w-[100px] items-center justify-center text-sm font-medium">
+                <div className="flex w-[100px] items-center justify-center text-sm font-medium @2xl/content:hidden">
                     Page {currentPage} of {totalPages}
                 </div>
-                <div className="@max-2xl/content:flex-row-reverse flex items-center gap-2">
+                <div className="flex items-center gap-2 @max-2xl/content:flex-row-reverse">
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={(value) => {
@@ -50,13 +50,13 @@ export function DataTablePagination<TData>({ table, className }: DataTablePagina
             </div>
 
             <div className="flex items-center sm:space-x-6 lg:space-x-8">
-                <div className="@max-3xl/content:hidden flex w-[100px] items-center justify-center text-sm font-medium">
+                <div className="flex w-[100px] items-center justify-center text-sm font-medium @max-3xl/content:hidden">
                     Page {currentPage} of {totalPages}
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button
                         variant="outline"
-                        className="@max-md/content:hidden size-8 p-0"
+                        className="size-8 p-0 @max-md/content:hidden"
                         onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
                     >
@@ -72,7 +72,7 @@ export function DataTablePagination<TData>({ table, className }: DataTablePagina
                     {pageNumbers.map((pageNumber, index) => (
                         <div key={`${pageNumber}-${index}`} className="flex items-center">
                             {pageNumber === '...' ? (
-                                <span className="text-muted-foreground px-1 text-sm">...</span>
+                                <span className="px-1 text-sm text-muted-foreground">...</span>
                             ) : (
                                 <Button
                                     variant={currentPage === pageNumber ? 'default' : 'outline'}
@@ -92,7 +92,7 @@ export function DataTablePagination<TData>({ table, className }: DataTablePagina
                     </Button>
                     <Button
                         variant="outline"
-                        className="@max-md/content:hidden size-8 p-0"
+                        className="size-8 p-0 @max-md/content:hidden"
                         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                         disabled={!table.getCanNextPage()}
                     >

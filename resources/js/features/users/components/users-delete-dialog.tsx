@@ -33,7 +33,7 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: UserDelete
             disabled={value.trim() !== currentRow.username}
             title={
                 <span className="text-destructive">
-                    <AlertTriangle className="stroke-destructive me-1 inline-block" size={18} /> Delete User
+                    <AlertTriangle className="me-1 inline-block stroke-destructive" size={18} /> Delete User
                 </span>
             }
             desc={

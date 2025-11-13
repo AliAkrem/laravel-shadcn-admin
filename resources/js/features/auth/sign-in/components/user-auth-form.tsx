@@ -94,7 +94,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
                             <FormMessage />
                             <Link
                                 href="/auth/forgot-password"
-                                className="text-muted-foreground absolute -top-0.5 end-0 text-sm font-medium hover:opacity-75"
+                                className="absolute end-0 -top-0.5 text-sm font-medium text-muted-foreground hover:opacity-75"
                             >
                                 Forgot password?
                             </Link>
@@ -111,7 +111,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
                         <span className="w-full border-t" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-background text-muted-foreground px-2">Or continue with</span>
+                        <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
                     </div>
                 </div>
 

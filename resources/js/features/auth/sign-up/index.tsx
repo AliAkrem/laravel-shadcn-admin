@@ -12,7 +12,7 @@ export function SignUp() {
                     <CardDescription>
                         Enter your email and password to create an account. <br />
                         Already have an account?{' '}
-                        <Link href="/auth/sign-in" className="hover:text-primary underline underline-offset-4">
+                        <Link href="/auth/sign-in" className="underline underline-offset-4 hover:text-primary">
                             Sign In
                         </Link>
                     </CardDescription>
@@ -21,13 +21,13 @@ export function SignUp() {
                     <SignUpForm />
                 </CardContent>
                 <CardFooter>
-                    <p className="text-muted-foreground px-8 text-center text-sm">
+                    <p className="px-8 text-center text-sm text-muted-foreground">
                         By creating an account, you agree to our{' '}
-                        <a href="/terms" className="hover:text-primary underline underline-offset-4">
+                        <a href="/terms" className="underline underline-offset-4 hover:text-primary">
                             Terms of Service
                         </a>{' '}
                         and{' '}
-                        <a href="/privacy" className="hover:text-primary underline underline-offset-4">
+                        <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
                             Privacy Policy
                         </a>
                         .

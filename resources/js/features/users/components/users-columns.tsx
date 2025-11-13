@@ -40,7 +40,7 @@ export const usersColumns: ColumnDef<User>[] = [
         meta: {
             className: cn(
                 'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)]',
-                '@4xl/content:table-cell @4xl/content:drop-shadow-none start-6 ps-0.5 max-md:sticky',
+                'start-6 ps-0.5 max-md:sticky @4xl/content:table-cell @4xl/content:drop-shadow-none',
             ),
         },
         enableHiding: false,
@@ -58,7 +58,7 @@ export const usersColumns: ColumnDef<User>[] = [
     {
         accessorKey: 'email',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
-        cell: ({ row }) => <div className="w-fit text-nowrap ps-2">{row.getValue('email')}</div>,
+        cell: ({ row }) => <div className="w-fit ps-2 text-nowrap">{row.getValue('email')}</div>,
     },
     {
         accessorKey: 'phoneNumber',
