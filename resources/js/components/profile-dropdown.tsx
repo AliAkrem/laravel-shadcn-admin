@@ -12,7 +12,6 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import useDialogState from '@/hooks/use-dialog-state';
-import { Link } from '@inertiajs/react';
 
 export function ProfileDropdown() {
     const [open, setOpen] = useDialogState();

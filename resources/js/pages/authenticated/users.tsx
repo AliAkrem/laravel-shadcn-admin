@@ -1,5 +1,5 @@
-import { AuthenticatedLayout } from '@/components/layout/authenticated-layout';
 import { ConfigDrawer } from '@/components/config-drawer';
+import { AuthenticatedLayout } from '@/components/layout/authenticated-layout';
 import { Header } from '@/components/layout/header';
 import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';

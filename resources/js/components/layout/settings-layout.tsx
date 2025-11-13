@@ -5,8 +5,8 @@ import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { Separator } from '@/components/ui/separator';
-import { Bell, Monitor, Palette, UserCog, Wrench } from 'lucide-react';
 import { SidebarNav } from '@/features/settings/components/sidebar-nav';
+import { Bell, Monitor, Palette, UserCog, Wrench } from 'lucide-react';
 
 const sidebarNavItems = [
     {

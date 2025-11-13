@@ -59,9 +59,7 @@ export function Settings() {
                     <aside className="top-0 lg:sticky lg:w-1/5">
                         <SidebarNav items={sidebarNavItems} />
                     </aside>
-                    <div className="flex w-full overflow-y-hidden p-1">
-                        {/* Content will be rendered by child pages */}
-                    </div>
+                    <div className="flex w-full overflow-y-hidden p-1">{/* Content will be rendered by child pages */}</div>
                 </div>
             </Main>
         </>
