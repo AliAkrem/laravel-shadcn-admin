@@ -93,7 +93,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
                             </FormControl>
                             <FormMessage />
                             <Link
-                                href="/auth/forgot-password"
+                                href="/forgot-password"
                                 className="absolute end-0 -top-0.5 text-sm font-medium text-muted-foreground hover:opacity-75"
                             >
                                 Forgot password?

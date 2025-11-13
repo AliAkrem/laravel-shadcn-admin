@@ -19,7 +19,7 @@ export function Otp() {
                 <CardFooter>
                     <p className="px-8 text-center text-sm text-muted-foreground">
                         Haven't received it?{' '}
-                        <Link href="/auth/sign-in" className="underline underline-offset-4 hover:text-primary">
+                        <Link href="/sign-in" className="underline underline-offset-4 hover:text-primary">
                             Resend a new code.
                         </Link>
                         .
