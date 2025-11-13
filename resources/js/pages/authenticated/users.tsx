@@ -1,17 +1,20 @@
+import { AuthenticatedLayout } from '@/components/layout/authenticated-layout';
 import { ConfigDrawer } from '@/components/config-drawer';
 import { Header } from '@/components/layout/header';
 import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
+import { UsersDialogs } from '@/features/users/components/users-dialogs';
+import { UsersPrimaryButtons } from '@/features/users/components/users-primary-buttons';
+import { UsersProvider } from '@/features/users/components/users-provider';
+import { UsersTable } from '@/features/users/components/users-table';
+import { users } from '@/features/users/data/users';
 import { router } from '@inertiajs/react';
-import { TasksDialogs } from './components/tasks-dialogs';
-import { TasksPrimaryButtons } from './components/tasks-primary-buttons';
-import { TasksProvider } from './components/tasks-provider';
-import { TasksTable } from './components/tasks-table';
-import { tasks } from './data/tasks';
 
-export function Tasks() {
+UsersPage.layout = (page: React.ReactNode) => <AuthenticatedLayout>{page}</AuthenticatedLayout>;
+
+export default function UsersPage() {
     const searchParams = new URLSearchParams(window.location.search);
     const search = Object.fromEntries(searchParams.entries());
 
@@ -23,7 +26,7 @@ export function Tasks() {
 
         const searchData = newSearch === true ? search : newSearch === false ? {} : newSearch;
 
-        router.visit('/tasks', {
+        router.visit('/users', {
             data: searchData,
             replace: opts.replace,
             preserveState: true,
@@ -31,7 +34,7 @@ export function Tasks() {
     };
 
     return (
-        <TasksProvider>
+        <UsersProvider>
             <Header fixed>
                 <Search />
                 <div className="ms-auto flex items-center space-x-4">
@@ -44,15 +47,15 @@ export function Tasks() {
             <Main className="flex flex-1 flex-col gap-4 sm:gap-6">
                 <div className="flex flex-wrap items-end justify-between gap-2">
                     <div>
-                        <h2 className="text-2xl font-bold tracking-tight">Tasks</h2>
-                        <p className="text-muted-foreground">Here&apos;s a list of your tasks for this month!</p>
+                        <h2 className="text-2xl font-bold tracking-tight">User List</h2>
+                        <p className="text-muted-foreground">Manage your users and their roles here.</p>
                     </div>
-                    <TasksPrimaryButtons />
+                    <UsersPrimaryButtons />
                 </div>
-                <TasksTable data={tasks} search={search} navigate={navigate} />
+                <UsersTable data={users} search={search} navigate={navigate} />
             </Main>
 
-            <TasksDialogs />
-        </TasksProvider>
+            <UsersDialogs />
+        </UsersProvider>
     );
 }

@@ -4,7 +4,7 @@ import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/comp
 import { showSubmittedData } from '@/lib/show-submitted-data';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from '@tanstack/react-router';
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,7 +16,6 @@ const formSchema = z.object({
 type OtpFormProps = React.HTMLAttributes<HTMLFormElement>;
 
 export function OtpForm({ className, ...props }: OtpFormProps) {
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -33,7 +32,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
         setTimeout(() => {
             setIsLoading(false);
-            navigate({ to: '/' });
+            router.visit('/dashboard');
         }, 1000);
     }
 

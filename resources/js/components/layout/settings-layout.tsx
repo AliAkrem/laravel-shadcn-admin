@@ -6,7 +6,7 @@ import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { Separator } from '@/components/ui/separator';
 import { Bell, Monitor, Palette, UserCog, Wrench } from 'lucide-react';
-import { SidebarNav } from './components/sidebar-nav';
+import { SidebarNav } from '@/features/settings/components/sidebar-nav';
 
 const sidebarNavItems = [
     {
@@ -36,10 +36,13 @@ const sidebarNavItems = [
     },
 ];
 
-export function Settings() {
+type SettingsLayoutProps = {
+    children: React.ReactNode;
+};
+
+export function SettingsLayout({ children }: SettingsLayoutProps) {
     return (
         <>
-            {/* ===== Top Heading ===== */}
             <Header>
                 <Search />
                 <div className="ms-auto flex items-center space-x-4">
@@ -59,9 +62,7 @@ export function Settings() {
                     <aside className="top-0 lg:sticky lg:w-1/5">
                         <SidebarNav items={sidebarNavItems} />
                     </aside>
-                    <div className="flex w-full overflow-y-hidden p-1">
-                        {/* Content will be rendered by child pages */}
-                    </div>
+                    <div className="flex w-full overflow-y-hidden p-1">{children}</div>
                 </div>
             </Main>
         </>

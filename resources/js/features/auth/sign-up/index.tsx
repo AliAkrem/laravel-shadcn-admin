@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { AuthLayout } from '../auth-layout';
 import { SignUpForm } from './components/sign-up-form';
 
@@ -12,7 +12,7 @@ export function SignUp() {
                     <CardDescription>
                         Enter your email and password to create an account. <br />
                         Already have an account?{' '}
-                        <Link to="/sign-in" className="hover:text-primary underline underline-offset-4">
+                        <Link href="/auth/sign-in" className="hover:text-primary underline underline-offset-4">
                             Sign In
                         </Link>
                     </CardDescription>

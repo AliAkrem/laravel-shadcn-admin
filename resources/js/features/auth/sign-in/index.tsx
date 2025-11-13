@@ -1,10 +1,10 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { useSearch } from '@tanstack/react-router';
 import { AuthLayout } from '../auth-layout';
 import { UserAuthForm } from './components/user-auth-form';
 
 export function SignIn() {
-    const { redirect } = useSearch({ from: '/(auth)/sign-in' });
+    const searchParams = new URLSearchParams(window.location.search);
+    const redirect = searchParams.get('redirect') || undefined;
 
     return (
         <AuthLayout>

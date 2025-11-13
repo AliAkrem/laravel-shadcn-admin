@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import useDialogState from '@/hooks/use-dialog-state';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from 'lucide-react';
 
 type NavUserProps = {
@@ -75,19 +75,19 @@ export function NavUser({ user }: NavUserProps) {
                             <DropdownMenuSeparator />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem asChild>
-                                    <Link to="/settings/account">
+                                    <Link href="/settings/account">
                                         <BadgeCheck />
                                         Account
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link to="/settings">
+                                    <Link href="/settings">
                                         <CreditCard />
                                         Billing
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
-                                    <Link to="/settings/notifications">
+                                    <Link href="/settings/notifications">
                                         <Bell />
                                         Notifications
                                     </Link>

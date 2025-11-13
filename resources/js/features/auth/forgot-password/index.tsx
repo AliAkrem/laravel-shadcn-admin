@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { AuthLayout } from '../auth-layout';
 import { ForgotPasswordForm } from './components/forgot-password-form';
 
@@ -19,7 +19,7 @@ export function ForgotPassword() {
                 <CardFooter>
                     <p className="text-muted-foreground mx-auto text-balance px-8 text-center text-sm">
                         Don't have an account?{' '}
-                        <Link to="/sign-up" className="hover:text-primary underline underline-offset-4">
+                        <Link href="/auth/sign-up" className="hover:text-primary underline underline-offset-4">
                             Sign up
                         </Link>
                         .

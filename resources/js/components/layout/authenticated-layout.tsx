@@ -5,10 +5,9 @@ import { LayoutProvider } from '@/context/layout-provider';
 import { SearchProvider } from '@/context/search-provider';
 import { getCookie } from '@/lib/cookies';
 import { cn } from '@/lib/utils';
-import { Outlet } from '@tanstack/react-router';
 
 type AuthenticatedLayoutProps = {
-    children?: React.ReactNode;
+    children: React.ReactNode;
 };
 
 export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
@@ -33,7 +32,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
                             'peer-data-[variant=inset]:has-data-[layout=fixed]:h-[calc(100svh-(var(--spacing)*4))]',
                         )}
                     >
-                        {children ?? <Outlet />}
+                        {children}
                     </SidebarInset>
                 </SidebarProvider>
             </LayoutProvider>

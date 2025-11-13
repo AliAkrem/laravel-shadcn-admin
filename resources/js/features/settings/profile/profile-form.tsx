@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { showSubmittedData } from '@/lib/show-submitted-data';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -87,7 +87,7 @@ export function ProfileForm() {
                                 </SelectContent>
                             </Select>
                             <FormDescription>
-                                You can manage verified email addresses in your <Link to="/">email settings</Link>.
+                                You can manage verified email addresses in your <Link href="/settings">email settings</Link>.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>

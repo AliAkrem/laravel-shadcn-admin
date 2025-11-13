@@ -3,7 +3,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { cn, sleep } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from '@tanstack/react-router';
+import { router } from '@inertiajs/react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,7 +17,6 @@ const formSchema = z.object({
 });
 
 export function ForgotPasswordForm({ className, ...props }: React.HTMLAttributes<HTMLFormElement>) {
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -35,7 +34,7 @@ export function ForgotPasswordForm({ className, ...props }: React.HTMLAttributes
             success: () => {
                 setIsLoading(false);
                 form.reset();
-                navigate({ to: '/otp' });
+                router.visit('/auth/otp');
                 return `Email sent to ${data.email}`;
             },
             error: 'Error',

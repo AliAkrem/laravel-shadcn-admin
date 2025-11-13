@@ -5,7 +5,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { showSubmittedData } from '@/lib/show-submitted-data';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -148,7 +148,7 @@ export function NotificationsForm() {
                                 <FormLabel>Use different settings for my mobile devices</FormLabel>
                                 <FormDescription>
                                     You can manage your mobile notifications in the{' '}
-                                    <Link to="/settings" className="underline decoration-dashed underline-offset-4 hover:decoration-solid">
+                                    <Link href="/settings" className="underline decoration-dashed underline-offset-4 hover:decoration-solid">
                                         mobile settings
                                     </Link>{' '}
                                     page.

@@ -1,6 +1,6 @@
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/button';
 
@@ -11,7 +11,7 @@ export function AppTitle() {
             <SidebarMenuItem>
                 <SidebarMenuButton size="lg" className="gap-0 py-0 hover:bg-transparent active:bg-transparent" asChild>
                     <div>
-                        <Link to="/" onClick={() => setOpenMobile(false)} className="grid flex-1 text-start text-sm leading-tight">
+                        <Link href="/" onClick={() => setOpenMobile(false)} className="grid flex-1 text-start text-sm leading-tight">
                             <span className="truncate font-bold">Shadcn-Admin</span>
                             <span className="truncate text-xs">Vite + ShadcnUI</span>
                         </Link>

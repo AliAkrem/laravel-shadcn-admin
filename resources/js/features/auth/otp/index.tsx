@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Link } from '@tanstack/react-router';
+import { Link } from '@inertiajs/react';
 import { AuthLayout } from '../auth-layout';
 import { OtpForm } from './components/otp-form';
 
@@ -19,7 +19,7 @@ export function Otp() {
                 <CardFooter>
                     <p className="text-muted-foreground px-8 text-center text-sm">
                         Haven't received it?{' '}
-                        <Link to="/sign-in" className="hover:text-primary underline underline-offset-4">
+                        <Link href="/auth/sign-in" className="hover:text-primary underline underline-offset-4">
                             Resend a new code.
                         </Link>
                         .

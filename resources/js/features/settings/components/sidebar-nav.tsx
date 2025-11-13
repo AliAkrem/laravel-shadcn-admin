@@ -2,7 +2,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { Link, useLocation, useNavigate } from '@tanstack/react-router';
+import { Link, router } from '@inertiajs/react';
 import { useState, type JSX } from 'react';
 
 type SidebarNavProps = React.HTMLAttributes<HTMLElement> & {
@@ -14,13 +14,12 @@ type SidebarNavProps = React.HTMLAttributes<HTMLElement> & {
 };
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
+    const pathname = window.location.pathname;
     const [val, setVal] = useState(pathname ?? '/settings');
 
     const handleSelect = (e: string) => {
         setVal(e);
-        navigate({ to: e });
+        router.visit(e);
     };
 
     return (
@@ -48,7 +47,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                     {items.map((item) => (
                         <Link
                             key={item.href}
-                            to={item.href}
+                            href={item.href}
                             className={cn(
                                 buttonVariants({ variant: 'ghost' }),
                                 pathname === item.href ? 'bg-muted hover:bg-accent' : 'hover:bg-accent hover:underline',

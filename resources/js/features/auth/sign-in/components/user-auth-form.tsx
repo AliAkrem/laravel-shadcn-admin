@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { cn, sleep } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth-store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link, router } from '@inertiajs/react';
 import { Loader2, LogIn } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,6 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLFormElement> {
 
 export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormProps) {
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
     const { auth } = useAuthStore();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -58,8 +57,8 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
                 auth.setAccessToken('mock-access-token');
 
                 // Redirect to the stored location or default to dashboard
-                const targetPath = redirectTo || '/';
-                navigate({ to: targetPath, replace: true });
+                const targetPath = redirectTo || '/dashboard';
+                router.visit(targetPath, { replace: true } as any);
 
                 return `Welcome back, ${data.email}!`;
             },
@@ -94,7 +93,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
                             </FormControl>
                             <FormMessage />
                             <Link
-                                to="/forgot-password"
+                                href="/auth/forgot-password"
                                 className="text-muted-foreground absolute -top-0.5 end-0 text-sm font-medium hover:opacity-75"
                             >
                                 Forgot password?
